@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Configurateur Montre</title>
+
+<style>
+body {
+    margin:0;
+    font-family: Arial;
+    background:#f5f5f5;
+}
+
+/* LAYOUT */
+.container {
+    display:flex;
+    height:100vh;
+}
+
+/* LEFT PANEL */
+.sidebar {
+    width:30%;
+    background:white;
+    padding:20px;
+    overflow-y:auto;
+    border-right:1px solid #ddd;
+}
+
+.section {
+    margin-bottom:25px;
+}
+
+.section h3 {
+    margin-bottom:10px;
+}
+
+.selector {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.selector button {
+    padding:8px 12px;
+    cursor:pointer;
+}
+
+/* RIGHT PREVIEW */
+.preview {
+    width:70%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+}
+
+/* WATCH STACK */
+.watch {
+    position:relative;
+    width:400px;
+    height:400px;
+}
+
+.watch img {
+    position:absolute;
+    width:100%;
+    height:100%;
+    object-fit:contain;
+}
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+<!-- MENU -->
+<div class="sidebar">
+
+    <!-- TYPE -->
+    <div class="section">
+        <h3>Type de montre</h3>
+        <div class="selector">
+            <button onclick="prev('type')">◀</button>
+            <span id="typeName"></span>
+            <button onclick="next('type')">▶</button>
+        </div>
+    </div>
+
+    <!-- BRACELET -->
+    <div class="section">
+        <h3>Bracelet</h3>
+        <div class="selector">
+            <button onclick="prev('bracelet')">◀</button>
+            <span id="braceletName"></span>
+            <button onclick="next('bracelet')">▶</button>
+        </div>
+    </div>
+
+    <!-- DIAL STYLE -->
+    <div class="section">
+        <h3>Style cadran</h3>
+        <div class="selector">
+            <button onclick="prev('dialStyle')">◀</button>
+            <span id="dialStyleName"></span>
+            <button onclick="next('dialStyle')">▶</button>
+        </div>
+    </div>
+
+    <!-- DIAL COLOR -->
+    <div class="section">
+        <h3>Couleur cadran</h3>
+        <div class="selector">
+            <button onclick="prev('dialColor')">◀</button>
+            <span id="dialColorName"></span>
+            <button onclick="next('dialColor')">▶</button>
+        </div>
+    </div>
+
+    <!-- HANDS -->
+    <div class="section">
+        <h3>Aiguilles</h3>
+        <div class="selector">
+            <button onclick="prev('hands')">◀</button>
+            <span id="handsName"></span>
+            <button onclick="next('hands')">▶</button>
+        </div>
+    </div>
+
+</div>
+
+<!-- PREVIEW -->
+<div class="preview">
+    <div class="watch">
+        <img id="braceletImg">
+        <img id="dialImg">
+        <img id="handsImg">
+    </div>
+</div>
+
+</div>
+
+<script>
+
+/* DATA */
+
+const data = {
+
+    types: ["nautilus","royaloak","datejust","daydate"],
+
+    bracelets: {
+        nautilus: ["silver","gold","black"],
+        royaloak: ["silver","gold"],
+        datejust: ["jubilee","oyster"],
+        daydate: ["president"]
+    },
+
+    dials: {
+        style1: ["black","blue","green"],
+        style2: ["white","gold"]
+    },
+
+    hands: ["classic","mercedes","sport"]
+};
+
+/* STATE */
+
+let state = {
+    typeIndex:0,
+    braceletIndex:0,
+    dialStyleIndex:0,
+    dialColorIndex:0,
+    handsIndex:0
+};
+
+/* HELPERS */
+
+function currentType(){
+    return data.types[state.typeIndex];
+}
+
+function currentBracelets(){
+    return data.bracelets[currentType()];
+}
+
+function currentDialStyle(){
+    return Object.keys(data.dials)[state.dialStyleIndex];
+}
+
+function currentDialColors(){
+    return data.dials[currentDialStyle()];
+}
+
+/* NAVIGATION */
+
+function next(cat){
+    if(cat==="type"){
+        state.typeIndex = (state.typeIndex+1)%data.types.length;
+        state.braceletIndex = 0;
+    }
+    if(cat==="bracelet"){
+        state.braceletIndex = (state.braceletIndex+1)%currentBracelets().length;
+    }
+    if(cat==="dialStyle"){
+        state.dialStyleIndex = (state.dialStyleIndex+1)%Object.keys(data.dials).length;
+        state.dialColorIndex = 0;
+    }
+    if(cat==="dialColor"){
+        state.dialColorIndex = (state.dialColorIndex+1)%currentDialColors().length;
+    }
+    if(cat==="hands"){
+        state.handsIndex = (state.handsIndex+1)%data.hands.length;
+    }
+
+    update();
+}
+
+function prev(cat){
+    if(cat==="type"){
+        state.typeIndex = (state.typeIndex-1+data.types.length)%data.types.length;
+        state.braceletIndex = 0;
+    }
+    if(cat==="bracelet"){
+        state.braceletIndex = (state.braceletIndex-1+currentBracelets().length)%currentBracelets().length;
+    }
+    if(cat==="dialStyle"){
+        state.dialStyleIndex = (state.dialStyleIndex-1+Object.keys(data.dials).length)%Object.keys(data.dials).length;
+        state.dialColorIndex = 0;
+    }
+    if(cat==="dialColor"){
+        state.dialColorIndex = (state.dialColorIndex-1+currentDialColors().length)%currentDialColors().length;
+    }
+    if(cat==="hands"){
+        state.handsIndex = (state.handsIndex-1+data.hands.length)%data.hands.length;
+    }
+
+    update();
+}
+
+/* UPDATE UI */
+
+function update(){
+
+    // TEXT
+    document.getElementById("typeName").innerText = currentType();
+    document.getElementById("braceletName").innerText = currentBracelets()[state.braceletIndex];
+    document.getElementById("dialStyleName").innerText = currentDialStyle();
+    document.getElementById("dialColorName").innerText = currentDialColors()[state.dialColorIndex];
+    document.getElementById("handsName").innerText = data.hands[state.handsIndex];
+
+    // IMAGES
+
+    document.getElementById("braceletImg").src =
+        "assets/bracelets/" + currentType() + "/" + currentBracelets()[state.braceletIndex] + ".png";
+
+    document.getElementById("dialImg").src =
+        "assets/dials/" + currentDialStyle() + "/" + currentDialColors()[state.dialColorIndex] + ".png";
+
+    document.getElementById("handsImg").src =
+        "assets/hands/" + data.hands[state.handsIndex] + ".png";
+}
+
+update();
+
+</script>
+
+</body>
+</html>
