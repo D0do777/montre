@@ -16,7 +16,6 @@ body {
     height:100vh;
 }
 
-/* MENU */
 .sidebar {
     width:30%;
     background:white;
@@ -40,7 +39,6 @@ button {
     cursor:pointer;
 }
 
-/* PREVIEW */
 .preview {
     width:70%;
     display:flex;
@@ -69,7 +67,6 @@ button {
 
 <div class="sidebar">
 
-<!-- TYPE MONTRE -->
 <div class="section">
 <h3>Type montre</h3>
 <div class="selector">
@@ -79,7 +76,6 @@ button {
 </div>
 </div>
 
-<!-- BRACELET -->
 <div class="section">
 <h3>Bracelet</h3>
 <div class="selector">
@@ -89,7 +85,6 @@ button {
 </div>
 </div>
 
-<!-- TYPE CADRAN -->
 <div class="section">
 <h3>Type cadran</h3>
 <div class="selector">
@@ -99,7 +94,6 @@ button {
 </div>
 </div>
 
-<!-- COULEUR CADRAN -->
 <div class="section">
 <h3>Couleur cadran</h3>
 <div class="selector">
@@ -109,7 +103,6 @@ button {
 </div>
 </div>
 
-<!-- AIGUILLES -->
 <div class="section">
 <h3>Aiguilles</h3>
 <div class="selector">
@@ -121,7 +114,6 @@ button {
 
 </div>
 
-<!-- PREVIEW -->
 <div class="preview">
 <div class="watch">
 <img id="braceletImg">
@@ -134,28 +126,25 @@ button {
 
 <script>
 
-/* CONFIGURATION */
+/* CONFIG */
 
 const TYPES = ["nautilus","royaloak","datejust","daydate"];
 
 const BRACELETS = {
-    nautilus:["silver","gold","black"],
-    royaloak:["silver","gold"],
-    datejust:["jubilee","oyster"],
-    daydate:["president","gold"]
+    nautilus:["argent","gold","rose"],
+    royaloak:["argent","gold","noir"],
+    datejust:["argent","gold","rose"],
+    daydate:["argent","gold","rose"]
 };
 
-const DIAL_TYPES = ["arabic","baton","roman","openheart","classic"];
+const DIAL_TYPES = ["arabic","baton"];
 
 const DIAL_COLORS = {
-    arabic:["black","blue","green"],
-    baton:["black","silver"],
-    roman:["white","black"],
-    openheart:["black","blue"],
-    classic:["white","gold","black"]
+    arabic:["noire","bleuclair","vert"],
+    baton:["blanc","bleu"]
 };
 
-const HANDS = ["classic","mercedes","sport"];
+const HANDS = ["1argent","2rose"];
 
 /* STATE */
 
@@ -244,10 +233,10 @@ function update(){
         "assets/bracelets/" + getType() + "/" + getBracelets()[state.bracelet] + ".png";
 
     document.getElementById("dialImg").src =
-        "assets/dials/" + getDialType() + "/" + getDialColors()[state.dialColor] + ".png";
+        "assets/cadranCouleur/" + getDialType() + "/" + getDialColors()[state.dialColor] + ".png";
 
     document.getElementById("handsImg").src =
-        "assets/hands/" + HANDS[state.hands] + ".png";
+        "assets/aiguilles/" + HANDS[state.hands] + ".png";
 }
 
 update();
