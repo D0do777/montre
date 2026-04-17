@@ -5,16 +5,8 @@
 <title>Configurateur Montre</title>
 
 <style>
-body {
-    margin:0;
-    font-family:Arial;
-    background:#f2f2f2;
-}
-
-.container {
-    display:flex;
-    height:100vh;
-}
+body { margin:0; font-family:Arial; background:#f2f2f2; }
+.container { display:flex; height:100vh; }
 
 .sidebar {
     width:30%;
@@ -24,9 +16,7 @@ body {
     border-right:1px solid #ddd;
 }
 
-.section {
-    margin-bottom:25px;
-}
+.section { margin-bottom:25px; }
 
 .selector {
     display:flex;
@@ -34,10 +24,7 @@ body {
     align-items:center;
 }
 
-button {
-    padding:8px 12px;
-    cursor:pointer;
-}
+button { padding:8px 12px; cursor:pointer; }
 
 .preview {
     width:70%;
@@ -126,28 +113,29 @@ button {
 
 <script>
 
-/* CONFIG */
+/* TYPES (respecte TES dossiers) */
+const TYPES = ["DateJust","DayDate","nautilus","royalOak"];
 
-const TYPES = ["nautilus","royaloak","datejust","daydate"];
-
+/* BRACELETS */
 const BRACELETS = {
-    nautilus:["argent","gold","rose"],
-    royaloak:["argent","gold","noir"],
-    datejust:["argent","gold","rose"],
-    daydate:["argent","gold","rose"]
+    DateJust:["argent","gold","rose"],
+    DayDate:["argent","gold","rose"],
+    royalOak:["argent","gold","noire","rose"],
+    nautilus:["NArgen","NArgenRose","NArgeGold","Noir","NRose"]
 };
 
+/* CADRANS */
 const DIAL_TYPES = ["arabic","baton"];
 
 const DIAL_COLORS = {
-    arabic:["noire","bleuclair","vert"],
+    arabic:["bleuclair","noire","vert"],
     baton:["blanc","bleu"]
 };
 
+/* AIGUILLES */
 const HANDS = ["1argent","2rose"];
 
 /* STATE */
-
 let state = {
     type:0,
     bracelet:0,
@@ -157,14 +145,12 @@ let state = {
 };
 
 /* HELPERS */
-
 function getType(){ return TYPES[state.type]; }
 function getBracelets(){ return BRACELETS[getType()]; }
 function getDialType(){ return DIAL_TYPES[state.dialType]; }
 function getDialColors(){ return DIAL_COLORS[getDialType()]; }
 
 /* NAVIGATION */
-
 function next(cat){
 
     if(cat==="type"){
@@ -220,7 +206,6 @@ function prev(cat){
 }
 
 /* UPDATE */
-
 function update(){
 
     document.getElementById("typeTxt").innerText = getType();
@@ -233,7 +218,7 @@ function update(){
         "assets/bracelets/" + getType() + "/" + getBracelets()[state.bracelet] + ".png";
 
     document.getElementById("dialImg").src =
-        "assets/cadranCouleur/" + getDialType() + "/" + getDialColors()[state.dialColor] + ".png";
+        "assets/cadransCouleur/" + getDialType() + "/" + getDialColors()[state.dialColor] + ".png";
 
     document.getElementById("handsImg").src =
         "assets/aiguilles/" + HANDS[state.hands] + ".png";
