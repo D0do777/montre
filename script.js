@@ -1,3 +1,4 @@
+
 const types = ["Datejust", "DayDate", "nautilus", "royalOak"];
 let currentType = 0;
 
@@ -21,7 +22,14 @@ let currentDialColor = 0;
 const hands = ["1_argent", "2_rose"];
 let currentHands = 0;
 
+
+// 🔥 NOUVEAU : contrôle affichage type
+let showType = true;
+
+
+// UPDATE
 function updateWatch() {
+
     const type = types[currentType];
     const bracelet = bracelets[type][currentBracelet];
     const dialType = dialTypes[currentDialType];
@@ -33,8 +41,16 @@ function updateWatch() {
     const dialPath = `assets/cadransCouleur/${dialType}/${dialColor}.png`;
     const handsPath = `assets/aiguilles/${hand}.png`;
 
-    // On met à jour les images
-    document.getElementById("typeImg").src = typePath;
+    const typeImg = document.getElementById("typeImg");
+
+    // 🔥 ON CONTROLE L’AFFICHAGE
+    if (showType) {
+        typeImg.src = typePath;
+        typeImg.style.display = "block";
+    } else {
+        typeImg.style.display = "none";
+    }
+
     document.getElementById("braceletImg").src = braceletPath;
     document.getElementById("dialImg").src = dialPath;
     document.getElementById("handsImg").src = handsPath;
@@ -46,32 +62,47 @@ function updateWatch() {
     document.getElementById("handsName").innerText = hand;
 }
 
+
+// NAVIGATION
+
 function nextType() {
     currentType = (currentType + 1) % types.length;
     currentBracelet = 0;
+
+    showType = true; // 🔥 on réaffiche le type
+
     updateWatch();
 }
 
 function prevType() {
     currentType = (currentType - 1 + types.length) % types.length;
     currentBracelet = 0;
+
+    showType = true;
+
     updateWatch();
 }
 
 function nextBracelet() {
     const type = types[currentType];
     currentBracelet = (currentBracelet + 1) % bracelets[type].length;
-    // On cache le type quand on change de bracelet
-    document.getElementById("typeImg").style.display = "none";
+
+    showType = false; // 🔥 on cache le type
+
     updateWatch();
 }
 
 function prevBracelet() {
     const type = types[currentType];
     currentBracelet = (currentBracelet - 1 + bracelets[type].length) % bracelets[type].length;
-    document.getElementById("typeImg").style.display = "none";
+
+    showType = false;
+
     updateWatch();
 }
+
+
+// reste inchangé
 
 function nextDialType() {
     currentDialType = (currentDialType + 1) % dialTypes.length;
@@ -107,5 +138,5 @@ function prevHands() {
     updateWatch();
 }
 
-// On initialise
+
 updateWatch();
