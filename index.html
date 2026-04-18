@@ -2,60 +2,50 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Custom Watch Builder</title>
+    <title>Watch Builder</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div class="container">
 
-    <!-- PANEL GAUCHE -->
     <div class="controls">
 
-        <h2>Type de montre</h2>
-        <div class="selector">
-            <button onclick="prevType()">◀</button>
-            <span id="typeName"></span>
-            <button onclick="nextType()">▶</button>
-        </div>
+        <h2>Type</h2>
+        <button onclick="prevType()">◀</button>
+        <span id="typeName"></span>
+        <button onclick="nextType()">▶</button>
 
         <h2>Bracelet</h2>
-        <div class="selector">
-            <button onclick="prevBracelet()">◀</button>
-            <span id="braceletName"></span>
-            <button onclick="nextBracelet()">▶</button>
-        </div>
+        <button onclick="prevBracelet()">◀</button>
+        <span id="braceletName"></span>
+        <button onclick="nextBracelet()">▶</button>
 
-        <h2>Cadran style</h2>
-        <div class="selector">
-            <button onclick="prevDialType()">◀</button>
-            <span id="dialTypeName"></span>
-            <button onclick="nextDialType()">▶</button>
-        </div>
+        <h2>Cadran type</h2>
+        <button onclick="prevDialType()">◀</button>
+        <span id="dialTypeName"></span>
+        <button onclick="nextDialType()">▶</button>
 
-        <h2>Couleur cadran</h2>
-        <div class="selector">
-            <button onclick="prevDialColor()">◀</button>
-            <span id="dialColorName"></span>
-            <button onclick="nextDialColor()">▶</button>
-        </div>
+        <h2>Cadran couleur</h2>
+        <button onclick="prevDialColor()">◀</button>
+        <span id="dialColorName"></span>
+        <button onclick="nextDialColor()">▶</button>
 
         <h2>Aiguilles</h2>
-        <div class="selector">
-            <button onclick="prevHands()">◀</button>
-            <span id="handsName"></span>
-            <button onclick="nextHands()">▶</button>
-        </div>
+        <button onclick="prevHands()">◀</button>
+        <span id="handsName"></span>
+        <button onclick="nextHands()">▶</button>
 
     </div>
 
-    <!-- AFFICHAGE DROITE -->
     <div class="viewer">
         <div class="watch">
 
-            <img id="braceletImg" class="layer">
-            <img id="dialImg" class="layer">
-            <img id="handsImg" class="layer">
+            <!-- ORDRE IMPORTANT -->
+            <img id="typeImg" class="layer type">
+            <img id="braceletImg" class="layer bracelet">
+            <img id="dialImg" class="layer dial">
+            <img id="handsImg" class="layer hands">
 
         </div>
     </div>
