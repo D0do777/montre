@@ -1,199 +1,67 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<title>Configurateur Montre</title>
-
-<style>
-body { margin:0; font-family:Arial; background:#f2f2f2; }
-.container { display:flex; height:100vh; }
-
-.sidebar {
-    width:30%;
-    background:white;
-    padding:20px;
-    overflow-y:auto;
-    border-right:1px solid #ddd;
-}
-
-.section { margin-bottom:25px; }
-
-.selector {
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
-
-button { padding:8px 12px; cursor:pointer; }
-
-.preview {
-    width:70%;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-}
-
-.watch {
-    position:relative;
-    width:420px;
-    height:420px;
-}
-
-.watch img {
-    position:absolute;
-    width:100%;
-    height:100%;
-    object-fit:contain;
-}
-</style>
+    <meta charset="UTF-8">
+    <title>Custom Watch Builder</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
 <div class="container">
 
-<div class="sidebar">
+    <!-- PANEL GAUCHE -->
+    <div class="controls">
 
-<div class="section">
-<h3>Type montre</h3>
-<div class="selector">
-<button onclick="prev('type')">◀</button>
-<span id="typeTxt"></span>
-<button onclick="next('type')">▶</button>
-</div>
-</div>
+        <h2>Type de montre</h2>
+        <div class="selector">
+            <button onclick="prevType()">◀</button>
+            <span id="typeName"></span>
+            <button onclick="nextType()">▶</button>
+        </div>
 
-<div class="section">
-<h3>Bracelet</h3>
-<div class="selector">
-<button onclick="prev('bracelet')">◀</button>
-<span id="braceletTxt"></span>
-<button onclick="next('bracelet')">▶</button>
-</div>
-</div>
+        <h2>Bracelet</h2>
+        <div class="selector">
+            <button onclick="prevBracelet()">◀</button>
+            <span id="braceletName"></span>
+            <button onclick="nextBracelet()">▶</button>
+        </div>
 
-<div class="section">
-<h3>Type cadran</h3>
-<div class="selector">
-<button onclick="prev('dialType')">◀</button>
-<span id="dialTypeTxt"></span>
-<button onclick="next('dialType')">▶</button>
-</div>
-</div>
+        <h2>Cadran style</h2>
+        <div class="selector">
+            <button onclick="prevDialType()">◀</button>
+            <span id="dialTypeName"></span>
+            <button onclick="nextDialType()">▶</button>
+        </div>
 
-<div class="section">
-<h3>Couleur cadran</h3>
-<div class="selector">
-<button onclick="prev('dialColor')">◀</button>
-<span id="dialColorTxt"></span>
-<button onclick="next('dialColor')">▶</button>
-</div>
-</div>
+        <h2>Couleur cadran</h2>
+        <div class="selector">
+            <button onclick="prevDialColor()">◀</button>
+            <span id="dialColorName"></span>
+            <button onclick="nextDialColor()">▶</button>
+        </div>
 
-<div class="section">
-<h3>Aiguilles</h3>
-<div class="selector">
-<button onclick="prev('hands')">◀</button>
-<span id="handsTxt"></span>
-<button onclick="next('hands')">▶</button>
-</div>
-</div>
+        <h2>Aiguilles</h2>
+        <div class="selector">
+            <button onclick="prevHands()">◀</button>
+            <span id="handsName"></span>
+            <button onclick="nextHands()">▶</button>
+        </div>
 
-</div>
+    </div>
 
-<div class="preview">
-<div class="watch">
-<img id="braceletImg">
-<img id="dialImg">
-<img id="handsImg">
-</div>
-</div>
+    <!-- AFFICHAGE DROITE -->
+    <div class="viewer">
+        <div class="watch">
+
+            <img id="braceletImg" class="layer">
+            <img id="dialImg" class="layer">
+            <img id="handsImg" class="layer">
+
+        </div>
+    </div>
 
 </div>
 
-<script>
-
-/* TYPES EXACTS (comme tes dossiers) */
-const TYPES = ["DateJuste","DayDate","nautilus","royalOak"];
-
-/* BRACELETS EXACTS */
-const BRACELETS = {
-    DateJuste:["silver","gold"],
-    DayDate:["argent","golde"],
-    royalOak:["argent","gold","noire","rose"],
-    nautilus:["NArgen","NArgenRose","NArgeGold","Noir","NRose"]
-};
-
-/* CADRANS */
-const DIAL_TYPES = ["arabic","Baton"];
-
-const DIAL_COLORS = {
-    arabic:["arabicN","vert"],
-    Baton:["blanc","bleu"]
-};
-
-/* AIGUILLES (avec espaces gérés) */
-const HANDS = ["1argent","The Rose"];
-
-/* STATE */
-let state = {
-    type:0,
-    bracelet:0,
-    dialType:0,
-    dialColor:0,
-    hands:0
-};
-
-/* HELPERS */
-function getType(){ return TYPES[state.type]; }
-function getBracelets(){ return BRACELETS[getType()]; }
-function getDialType(){ return DIAL_TYPES[state.dialType]; }
-function getDialColors(){ return DIAL_COLORS[getDialType()]; }
-
-/* NAV */
-function next(cat){
-    if(cat==="type"){ state.type=(state.type+1)%TYPES.length; state.bracelet=0; }
-    if(cat==="bracelet"){ state.bracelet=(state.bracelet+1)%getBracelets().length; }
-    if(cat==="dialType"){ state.dialType=(state.dialType+1)%DIAL_TYPES.length; state.dialColor=0; }
-    if(cat==="dialColor"){ state.dialColor=(state.dialColor+1)%getDialColors().length; }
-    if(cat==="hands"){ state.hands=(state.hands+1)%HANDS.length; }
-    update();
-}
-
-function prev(cat){
-    if(cat==="type"){ state.type=(state.type-1+TYPES.length)%TYPES.length; state.bracelet=0; }
-    if(cat==="bracelet"){ state.bracelet=(state.bracelet-1+getBracelets().length)%getBracelets().length; }
-    if(cat==="dialType"){ state.dialType=(state.dialType-1+DIAL_TYPES.length)%DIAL_TYPES.length; state.dialColor=0; }
-    if(cat==="dialColor"){ state.dialColor=(state.dialColor-1+getDialColors().length)%getDialColors().length; }
-    if(cat==="hands"){ state.hands=(state.hands-1+HANDS.length)%HANDS.length; }
-    update();
-}
-
-/* UPDATE */
-function update(){
-
-    document.getElementById("typeTxt").innerText = getType();
-    document.getElementById("braceletTxt").innerText = getBracelets()[state.bracelet];
-    document.getElementById("dialTypeTxt").innerText = getDialType();
-    document.getElementById("dialColorTxt").innerText = getDialColors()[state.dialColor];
-    document.getElementById("handsTxt").innerText = HANDS[state.hands];
-
-    document.getElementById("braceletImg").src =
-        "assets/bracelets/" + getType() + "/" + getBracelets()[state.bracelet] + ".png";
-
-    document.getElementById("dialImg").src =
-        "assets/cadransCouleur/" + getDialType() + "/" + getDialColors()[state.dialColor] + ".png";
-
-    /* IMPORTANT → gestion espaces */
-    let handsName = HANDS[state.hands].replace(/ /g, "%20");
-
-    document.getElementById("handsImg").src =
-        "assets/aiguilles/" + handsName + ".png";
-}
-
-update();
-
-</script>
-
+<script src="script.js"></script>
 </body>
 </html>
