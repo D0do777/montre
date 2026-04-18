@@ -16,8 +16,8 @@
 
 .dial {
     z-index: 3;
-    width: 150px;  /* Ajuster si besoin */
-    height: 150px;
+    width: 100px;  /* Ajuster si besoin */
+    height: 100px;
     top: 35px;    /* Centrer par rapport au type */
     left: 35px;
 }
