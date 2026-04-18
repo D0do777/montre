@@ -34,19 +34,8 @@ body {
     left: 0;
 }
 
-/* ORDRE FINAL */
-.type {
-    z-index: 1;
-}
-
-.bracelet {
-    z-index: 2;
-}
-
-.dial {
-    z-index: 3;
-}
-
-.hands {
-    z-index: 4;
-}
+/* ORDRE PARFAIT */
+.type { z-index: 1; }
+.bracelet { z-index: 2; }
+.dial { z-index: 3; }
+.hands { z-index: 4; }
