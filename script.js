@@ -1,9 +1,6 @@
-
-// TYPES (exact dossier "types")
 const types = ["Datejust", "DayDate", "nautilus", "royalOak"];
 let currentType = 0;
 
-// BRACELETS (exact dossiers)
 const bracelets = {
     Datejust: ["argent", "gold"],
     DayDate: ["argent", "gold"],
@@ -12,7 +9,6 @@ const bracelets = {
 };
 let currentBracelet = 0;
 
-// CADRAN
 const dialTypes = ["arabic", "baton"];
 let currentDialType = 0;
 
@@ -22,14 +18,10 @@ const dialColors = {
 };
 let currentDialColor = 0;
 
-// AIGUILLES
 const hands = ["1_argent", "2_rose"];
 let currentHands = 0;
 
-
-// UPDATE
 function updateWatch() {
-
     const type = types[currentType];
     const bracelet = bracelets[type][currentBracelet];
     const dialType = dialTypes[currentDialType];
@@ -41,8 +33,7 @@ function updateWatch() {
     const dialPath = `assets/cadransCouleur/${dialType}/${dialColor}.png`;
     const handsPath = `assets/aiguilles/${hand}.png`;
 
-    console.log(typePath, braceletPath, dialPath, handsPath);
-
+    // On met à jour les images
     document.getElementById("typeImg").src = typePath;
     document.getElementById("braceletImg").src = braceletPath;
     document.getElementById("dialImg").src = dialPath;
@@ -55,8 +46,6 @@ function updateWatch() {
     document.getElementById("handsName").innerText = hand;
 }
 
-
-// NAV
 function nextType() {
     currentType = (currentType + 1) % types.length;
     currentBracelet = 0;
@@ -72,12 +61,15 @@ function prevType() {
 function nextBracelet() {
     const type = types[currentType];
     currentBracelet = (currentBracelet + 1) % bracelets[type].length;
+    // On cache le type quand on change de bracelet
+    document.getElementById("typeImg").style.display = "none";
     updateWatch();
 }
 
 function prevBracelet() {
     const type = types[currentType];
     currentBracelet = (currentBracelet - 1 + bracelets[type].length) % bracelets[type].length;
+    document.getElementById("typeImg").style.display = "none";
     updateWatch();
 }
 
@@ -115,4 +107,5 @@ function prevHands() {
     updateWatch();
 }
 
+// On initialise
 updateWatch();
