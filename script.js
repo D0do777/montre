@@ -1,7 +1,9 @@
 
+// TYPES
 const types = ["Datejust", "DayDate", "nautilus", "royalOak"];
 let currentType = 0;
 
+// BRACELETS
 const bracelets = {
     Datejust: ["argent", "gold"],
     DayDate: ["argent", "gold"],
@@ -10,6 +12,7 @@ const bracelets = {
 };
 let currentBracelet = 0;
 
+// CADRAN
 const dialTypes = ["arabic", "baton"];
 let currentDialType = 0;
 
@@ -19,12 +22,14 @@ const dialColors = {
 };
 let currentDialColor = 0;
 
+// AIGUILLES
 const hands = ["1_argent", "2_rose"];
 let currentHands = 0;
 
 
-// 🔥 NOUVEAU : contrôle affichage type
+// 🔥 NOUVEAU : contrôle affichage
 let showType = true;
+let showBracelet = true;
 
 
 // UPDATE
@@ -42,8 +47,9 @@ function updateWatch() {
     const handsPath = `assets/aiguilles/${hand}.png`;
 
     const typeImg = document.getElementById("typeImg");
+    const braceletImg = document.getElementById("braceletImg");
 
-    // 🔥 ON CONTROLE L’AFFICHAGE
+    // TYPE
     if (showType) {
         typeImg.src = typePath;
         typeImg.style.display = "block";
@@ -51,10 +57,19 @@ function updateWatch() {
         typeImg.style.display = "none";
     }
 
-    document.getElementById("braceletImg").src = braceletPath;
+    // BRACELET
+    if (showBracelet) {
+        braceletImg.src = braceletPath;
+        braceletImg.style.display = "block";
+    } else {
+        braceletImg.style.display = "none";
+    }
+
+    // AUTRES
     document.getElementById("dialImg").src = dialPath;
     document.getElementById("handsImg").src = handsPath;
 
+    // LABELS
     document.getElementById("typeName").innerText = type;
     document.getElementById("braceletName").innerText = bracelet;
     document.getElementById("dialTypeName").innerText = dialType;
@@ -69,7 +84,8 @@ function nextType() {
     currentType = (currentType + 1) % types.length;
     currentBracelet = 0;
 
-    showType = true; // 🔥 on réaffiche le type
+    showType = true;
+    showBracelet = false; // 🔥 on cache bracelet
 
     updateWatch();
 }
@@ -79,6 +95,7 @@ function prevType() {
     currentBracelet = 0;
 
     showType = true;
+    showBracelet = false;
 
     updateWatch();
 }
@@ -87,7 +104,8 @@ function nextBracelet() {
     const type = types[currentType];
     currentBracelet = (currentBracelet + 1) % bracelets[type].length;
 
-    showType = false; // 🔥 on cache le type
+    showType = false; // 🔥 on cache type
+    showBracelet = true;
 
     updateWatch();
 }
@@ -97,13 +115,13 @@ function prevBracelet() {
     currentBracelet = (currentBracelet - 1 + bracelets[type].length) % bracelets[type].length;
 
     showType = false;
+    showBracelet = true;
 
     updateWatch();
 }
 
 
 // reste inchangé
-
 function nextDialType() {
     currentDialType = (currentDialType + 1) % dialTypes.length;
     currentDialColor = 0;
@@ -139,4 +157,5 @@ function prevHands() {
 }
 
 
+// INIT
 updateWatch();
