@@ -1,11 +1,11 @@
-// TYPES
-const types = ["DateJuste", "DayDate", "nautilus", "royalOak"];
+// TYPES (noms EXACTS fichiers dans /type)
+const types = ["Datejust", "DayDate", "nautilus", "royalOak"];
 let currentType = 0;
 
-// BRACELETS (dépendent du type)
+// BRACELETS (dans /bracelets/type/)
 const bracelets = {
-    DateJuste: ["gold", "silver"],
-    DayDate: ["argent", "gold"],
+    Datejust: ["gold", "silver"],
+    DayDate: ["golde", "argent"], // tu m’as dit volontairement "golde"
     nautilus: ["ArgentGold", "Argent", "ArgentRose", "Noir", "Rose"],
     royalOak: ["argent", "gold", "noire", "rose"]
 };
@@ -15,10 +15,10 @@ let currentBracelet = 0;
 const dialTypes = ["baton", "arabic"];
 let currentDialType = 0;
 
-// COULEUR CADRAN
+// COULEURS cadran
 const dialColors = {
-    baton: ["blanc", "bleu"],
-    arabic: ["blanc", "vert"]
+    baton: ["bleu", "blanc"],
+    arabic: ["bleu", "blanc"]
 };
 let currentDialColor = 0;
 
@@ -27,25 +27,32 @@ const hands = ["argent", "rose"];
 let currentHands = 0;
 
 
-// --- UPDATE IMAGE ---
+// --- UPDATE ---
 function updateWatch() {
+
     const type = types[currentType];
     const bracelet = bracelets[type][currentBracelet];
     const dialType = dialTypes[currentDialType];
     const dialColor = dialColors[dialType][currentDialColor];
     const hand = hands[currentHands];
 
-    // chemins
+    // TYPE (fond montre)
+    document.getElementById("typeImg").src =
+        `assets/type/${type}.png`;
+
+    // BRACELET
     document.getElementById("braceletImg").src =
         `assets/bracelets/${type}/${bracelet}.png`;
 
+    // CADRAN
     document.getElementById("dialImg").src =
-        `assets/cadranCouleur/${dialType}/${dialColor}.png`;
+        `assets/cadran/${dialType}/${dialColor}.png`;
 
+    // AIGUILLES
     document.getElementById("handsImg").src =
         `assets/aiguilles/${hand}.png`;
 
-    // labels
+    // LABELS
     document.getElementById("typeName").innerText = type;
     document.getElementById("braceletName").innerText = bracelet;
     document.getElementById("dialTypeName").innerText = dialType;
@@ -54,8 +61,7 @@ function updateWatch() {
 }
 
 
-// --- NAVIGATION ---
-
+// NAVIGATION
 function nextType() {
     currentType = (currentType + 1) % types.length;
     currentBracelet = 0;
