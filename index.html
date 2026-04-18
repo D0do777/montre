@@ -1,139 +1,139 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>Configurateur Montre</title>
+<meta charset="UTF-8">
+<title>Configurateur Montre</title>
 
-  <style>
-    body { margin:0; font-family:Arial; background:#f2f2f2; }
-    .container { display:flex; height:100vh; }
+<style>
+body { margin:0; font-family:Arial; background:#f2f2f2; }
+.container { display:flex; height:100vh; }
 
-    .sidebar {
-      width:30%;
-      background:white;
-      padding:20px;
-      overflow-y:auto;
-      border-right:1px solid #ddd;
-    }
+.sidebar {
+    width:30%;
+    background:white;
+    padding:20px;
+    overflow-y:auto;
+    border-right:1px solid #ddd;
+}
 
-    .section { margin-bottom:25px; }
+.section { margin-bottom:25px; }
 
-    .selector {
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-    }
+.selector {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
 
-    button { padding:8px 12px; cursor:pointer; }
+button { padding:8px 12px; cursor:pointer; }
 
-    .preview {
-      width:70%;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-    }
+.preview {
+    width:70%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
 
-    .watch {
-      position:relative;
-      width:420px;
-      height:420px;
-    }
+.watch {
+    position:relative;
+    width:420px;
+    height:420px;
+}
 
-    .watch img {
-      position:absolute;
-      width:100%;
-      height:100%;
-      object-fit:contain;
-    }
-  </style>
+.watch img {
+    position:absolute;
+    width:100%;
+    height:100%;
+    object-fit:contain;
+}
+</style>
 </head>
 
 <body>
 
 <div class="container">
 
-  <div class="sidebar">
+<div class="sidebar">
 
-    <div class="section">
-      <h3>Type montre</h3>
-      <div class="selector">
-        <button onclick="prev('type')">◀</button>
-        <span id="typeTxt"></span>
-        <button onclick="next('type')">▶</button>
-      </div>
-    </div>
+<div class="section">
+<h3>Type montre</h3>
+<div class="selector">
+<button onclick="prev('type')">◀</button>
+<span id="typeTxt"></span>
+<button onclick="next('type')">▶</button>
+</div>
+</div>
 
-    <div class="section">
-      <h3>Bracelet</h3>
-      <div class="selector">
-        <button onclick="prev('bracelet')">◀</button>
-        <span id="braceletTxt"></span>
-        <button onclick="next('bracelet')">▶</button>
-      </div>
-    </div>
+<div class="section">
+<h3>Bracelet</h3>
+<div class="selector">
+<button onclick="prev('bracelet')">◀</button>
+<span id="braceletTxt"></span>
+<button onclick="next('bracelet')">▶</button>
+</div>
+</div>
 
-    <div class="section">
-      <h3>Type cadran</h3>
-      <div class="selector">
-        <button onclick="prev('dialType')">◀</button>
-        <span id="dialTypeTxt"></span>
-        <button onclick="next('dialType')">▶</button>
-      </div>
-    </div>
+<div class="section">
+<h3>Type cadran</h3>
+<div class="selector">
+<button onclick="prev('dialType')">◀</button>
+<span id="dialTypeTxt"></span>
+<button onclick="next('dialType')">▶</button>
+</div>
+</div>
 
-    <div class="section">
-      <h3>Couleur cadran</h3>
-      <div class="selector">
-        <button onclick="prev('dialColor')">◀</button>
-        <span id="dialColorTxt"></span>
-        <button onclick="next('dialColor')">▶</button>
-      </div>
-    </div>
+<div class="section">
+<h3>Couleur cadran</h3>
+<div class="selector">
+<button onclick="prev('dialColor')">◀</button>
+<span id="dialColorTxt"></span>
+<button onclick="next('dialColor')">▶</button>
+</div>
+</div>
 
-    <div class="section">
-      <h3>Aiguilles</h3>
-      <div class="selector">
-        <button onclick="prev('hands')">◀</button>
-        <span id="handsTxt"></span>
-        <button onclick="next('hands')">▶</button>
-      </div>
-    </div>
+<div class="section">
+<h3>Aiguilles</h3>
+<div class="selector">
+<button onclick="prev('hands')">◀</button>
+<span id="handsTxt"></span>
+<button onclick="next('hands')">▶</button>
+</div>
+</div>
 
-  </div>
+</div>
 
-  <div class="preview">
-    <div class="watch">
-      <img id="braceletImg">
-      <img id="dialImg">
-      <img id="handsImg">
-    </div>
-  </div>
+<div class="preview">
+<div class="watch">
+<img id="braceletImg">
+<img id="dialImg">
+<img id="handsImg">
+</div>
+</div>
 
 </div>
 
 <script>
 
-/* TYPES (correspondent aux dossiers) */
-const TYPES = ["DateJuste", "DayDate", "nautilus", "royalOak"];
+/* TYPES EXACTS (comme tes dossiers) */
+const TYPES = ["DateJuste","DayDate","nautilus","royalOak"];
 
-/* BRACELETS */
+/* BRACELETS EXACTS */
 const BRACELETS = {
-    DateJuste: ["gold", "silver"],
-    DayDate: ["argent", "gold"],
-    royalOak: ["argent", "gold", "noire", "rose"],
-    nautilus: ["nArgen", "nArgenRose", "nArgeGold", "Noir", "NRose"]
+    DateJuste:["silver","gold"],
+    DayDate:["argent","golde"],
+    royalOak:["argent","gold","noire","rose"],
+    nautilus:["NArgen","NArgenRose","NArgeGold","Noir","NRose"]
 };
 
 /* CADRANS */
-const DIAL_TYPES = ["arabic", "Baton"];
+const DIAL_TYPES = ["arabic","Baton"];
 
 const DIAL_COLORS = {
-    arabic: ["arabicN", "vert"],
-    Baton: ["blanc", "bleu"]
+    arabic:["arabicN","vert"],
+    Baton:["blanc","bleu"]
 };
 
-/* AIGUILLES */
-const HANDS = ["1argent", "2rose"];
+/* AIGUILLES (avec espaces gérés) */
+const HANDS = ["1argent","The Rose"];
 
 /* STATE */
 let state = {
@@ -145,56 +145,33 @@ let state = {
 };
 
 /* HELPERS */
-function getType() { return TYPES[state.type]; }
-function getBracelets() { return BRACELETS[getType()]; }
-function getDialType() { return DIAL_TYPES[state.dialType]; }
-function getDialColors() { return DIAL_COLORS[getDialType()]; }
+function getType(){ return TYPES[state.type]; }
+function getBracelets(){ return BRACELETS[getType()]; }
+function getDialType(){ return DIAL_TYPES[state.dialType]; }
+function getDialColors(){ return DIAL_COLORS[getDialType()]; }
 
-/* NAVIGATION */
-function next(cat) {
-    if(cat === "type") {
-        state.type = (state.type + 1) % TYPES.length;
-        state.bracelet = 0; // reset bracelet
-    }
-    if(cat === "bracelet") {
-        state.bracelet = (state.bracelet + 1) % getBracelets().length;
-    }
-    if(cat === "dialType") {
-        state.dialType = (state.dialType + 1) % DIAL_TYPES.length;
-        state.dialColor = 0; // reset color
-    }
-    if(cat === "dialColor") {
-        state.dialColor = (state.dialColor + 1) % getDialColors().length;
-    }
-    if(cat === "hands") {
-        state.hands = (state.hands + 1) % HANDS.length;
-    }
+/* NAV */
+function next(cat){
+    if(cat==="type"){ state.type=(state.type+1)%TYPES.length; state.bracelet=0; }
+    if(cat==="bracelet"){ state.bracelet=(state.bracelet+1)%getBracelets().length; }
+    if(cat==="dialType"){ state.dialType=(state.dialType+1)%DIAL_TYPES.length; state.dialColor=0; }
+    if(cat==="dialColor"){ state.dialColor=(state.dialColor+1)%getDialColors().length; }
+    if(cat==="hands"){ state.hands=(state.hands+1)%HANDS.length; }
     update();
 }
 
-function prev(cat) {
-    if(cat === "type") {
-        state.type = (state.type - 1 + TYPES.length) % TYPES.length;
-        state.bracelet = 0; // reset bracelet
-    }
-    if(cat === "bracelet") {
-        state.bracelet = (state.bracelet - 1 + getBracelets().length) % getBracelets().length;
-    }
-    if(cat === "dialType") {
-        state.dialType = (state.dialType - 1 + DIAL_TYPES.length) % DIAL_TYPES.length;
-        state.dialColor = 0; // reset color
-    }
-    if(cat === "dialColor") {
-        state.dialColor = (state.dialColor - 1 + getDialColors().length) % getDialColors().length;
-    }
-    if(cat === "hands") {
-        state.hands = (state.hands - 1 + HANDS.length) % HANDS.length;
-    }
+function prev(cat){
+    if(cat==="type"){ state.type=(state.type-1+TYPES.length)%TYPES.length; state.bracelet=0; }
+    if(cat==="bracelet"){ state.bracelet=(state.bracelet-1+getBracelets().length)%getBracelets().length; }
+    if(cat==="dialType"){ state.dialType=(state.dialType-1+DIAL_TYPES.length)%DIAL_TYPES.length; state.dialColor=0; }
+    if(cat==="dialColor"){ state.dialColor=(state.dialColor-1+getDialColors().length)%getDialColors().length; }
+    if(cat==="hands"){ state.hands=(state.hands-1+HANDS.length)%HANDS.length; }
     update();
 }
 
 /* UPDATE */
-function update() {
+function update(){
+
     document.getElementById("typeTxt").innerText = getType();
     document.getElementById("braceletTxt").innerText = getBracelets()[state.bracelet];
     document.getElementById("dialTypeTxt").innerText = getDialType();
@@ -207,8 +184,11 @@ function update() {
     document.getElementById("dialImg").src =
         "assets/cadransCouleur/" + getDialType() + "/" + getDialColors()[state.dialColor] + ".png";
 
+    /* IMPORTANT → gestion espaces */
+    let handsName = HANDS[state.hands].replace(/ /g, "%20");
+
     document.getElementById("handsImg").src =
-        "assets/aiguilles/" + HANDS[state.hands] + ".png";
+        "assets/aiguilles/" + handsName + ".png";
 }
 
 update();
