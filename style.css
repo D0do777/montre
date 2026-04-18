@@ -1,4 +1,33 @@
-/* BASE commune */
+body {
+    margin: 0;
+    font-family: Arial;
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+.controls {
+    width: 30%;
+    padding: 20px;
+    background: #f5f5f5;
+}
+
+.viewer {
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.watch {
+    position: relative;
+    width: 300px;
+    height: 300px;
+}
+
+/* CENTRAGE PARFAIT */
 .layer {
     position: absolute;
     top: 50%;
@@ -6,26 +35,8 @@
     transform: translate(-50%, -50%);
 }
 
-/* TYPE (optionnel si caché) */
-.type {
-    z-index: 1;
-    width: 260px;
-}
-
-/* BRACELET = BASE */
-.bracelet {
-    z-index: 2;
-    width: 300px;
-}
-
-/* CADRAN = PLUS PETIT */
-.dial {
-    z-index: 3;
-    width: 140px;
-}
-
-/* AIGUILLES = même taille que cadran */
-.hands {
-    z-index: 4;
-    width: 140px;
-}
+/* CALQUES */
+.type { z-index: 1; width: 260px; }
+.bracelet { z-index: 2; width: 300px; }
+.dial { z-index: 3; width: 140px; }
+.hands { z-index: 4; width: 140px; }
