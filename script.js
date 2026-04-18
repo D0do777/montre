@@ -1,27 +1,32 @@
-const types = ["Datejust", "DayDate", "nautilus", "royalOak"];
+// TYPES (ATTENTION AUX MAJUSCULES)
+const types = ["DateJust", "DayDate", "Nautilus", "RoyalOak"];
 let currentType = 0;
 
+// BRACELETS (NOMS EXACTS)
 const bracelets = {
-    Datejust: ["gold", "silver"],
-    DayDate: ["golde", "argent"],
-    nautilus: ["ArgentGold", "Argent", "ArgentRose", "Noir", "Rose"],
-    royalOak: ["argent", "gold", "noire", "rose"]
+    DateJust: ["Gold", "Argent"],
+    DayDate: ["Gold", "Argent"],
+    Nautilus: ["Argent", "Rose"],
+    RoyalOak: ["argent", "gold", "noire", "rose"]
 };
 let currentBracelet = 0;
 
-const dialTypes = ["baton", "arabic"];
+// CADRAN
+const dialTypes = ["Baton", "Arabic"];
 let currentDialType = 0;
 
 const dialColors = {
-    baton: ["bleu", "blanc"],
-    arabic: ["bleu", "blanc"]
+    Baton: ["Bleu", "Blanc"],
+    Arabic: ["Bleu", "Blanc"]
 };
 let currentDialColor = 0;
 
-const hands = ["argent", "rose"];
+// AIGUILLES (TES NOMS)
+const hands = ["1 argent", "2 rose"];
 let currentHands = 0;
 
 
+// UPDATE
 function updateWatch() {
 
     const type = types[currentType];
@@ -35,12 +40,10 @@ function updateWatch() {
     const dialPath = `assets/cadran/${dialType}/${dialColor}.png`;
     const handsPath = `assets/aiguilles/${hand}.png`;
 
-    // 🔥 DEBUG CONSOLE
     console.log("TYPE:", typePath);
     console.log("BRACELET:", braceletPath);
     console.log("CADRAN:", dialPath);
     console.log("AIGUILLES:", handsPath);
-    console.log("--------------------");
 
     document.getElementById("typeImg").src = typePath;
     document.getElementById("braceletImg").src = braceletPath;
