@@ -1,28 +1,29 @@
-// TYPES (ATTENTION AUX MAJUSCULES)
-const types = ["DateJust", "DayDate", "Nautilus", "RoyalOak"];
+
+// TYPES (exact dossier "types")
+const types = ["Datejust", "DayDate", "nautilus", "royalOak"];
 let currentType = 0;
 
-// BRACELETS (NOMS EXACTS)
+// BRACELETS (exact dossiers)
 const bracelets = {
-    DateJust: ["Gold", "Argent"],
-    DayDate: ["Gold", "Argent"],
-    Nautilus: ["Argent", "Rose"],
-    RoyalOak: ["argent", "gold", "noire", "rose"]
+    Datejust: ["argent", "gold"],
+    DayDate: ["argent", "gold"],
+    nautilus: ["argent", "noire", "rose"],
+    royalOak: ["argent", "gold", "noire", "rose"]
 };
 let currentBracelet = 0;
 
 // CADRAN
-const dialTypes = ["Baton", "Arabic"];
+const dialTypes = ["arabic", "baton"];
 let currentDialType = 0;
 
 const dialColors = {
-    Baton: ["Bleu", "Blanc"],
-    Arabic: ["Bleu", "Blanc"]
+    arabic: ["blanc", "bleu"],
+    baton: ["blanc", "bleu"]
 };
 let currentDialColor = 0;
 
-// AIGUILLES (TES NOMS)
-const hands = ["1 argent", "2 rose"];
+// AIGUILLES
+const hands = ["1_argent", "2_rose"];
 let currentHands = 0;
 
 
@@ -35,15 +36,12 @@ function updateWatch() {
     const dialColor = dialColors[dialType][currentDialColor];
     const hand = hands[currentHands];
 
-    const typePath = `assets/type/${type}.png`;
+    const typePath = `assets/types/${type}.png`;
     const braceletPath = `assets/bracelets/${type}/${bracelet}.png`;
-    const dialPath = `assets/cadran/${dialType}/${dialColor}.png`;
+    const dialPath = `assets/cadransCouleur/${dialType}/${dialColor}.png`;
     const handsPath = `assets/aiguilles/${hand}.png`;
 
-    console.log("TYPE:", typePath);
-    console.log("BRACELET:", braceletPath);
-    console.log("CADRAN:", dialPath);
-    console.log("AIGUILLES:", handsPath);
+    console.log(typePath, braceletPath, dialPath, handsPath);
 
     document.getElementById("typeImg").src = typePath;
     document.getElementById("braceletImg").src = braceletPath;
@@ -58,7 +56,7 @@ function updateWatch() {
 }
 
 
-// NAVIGATION
+// NAV
 function nextType() {
     currentType = (currentType + 1) % types.length;
     currentBracelet = 0;
