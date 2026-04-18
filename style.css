@@ -27,13 +27,14 @@ body {
     height: 300px;
 }
 
-/* BASE */
 .layer {
     position: absolute;
     width: 100%;
+    top: 0;
+    left: 0;
 }
 
-/* ORDRE DES CALQUES */
+/* ORDRE FINAL */
 .type {
     z-index: 1;
 }
