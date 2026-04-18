@@ -1,33 +1,27 @@
-// TYPES (noms EXACTS fichiers dans /type)
 const types = ["Datejust", "DayDate", "nautilus", "royalOak"];
 let currentType = 0;
 
-// BRACELETS (dans /bracelets/type/)
 const bracelets = {
     Datejust: ["gold", "silver"],
-    DayDate: ["golde", "argent"], // tu m’as dit volontairement "golde"
+    DayDate: ["golde", "argent"],
     nautilus: ["ArgentGold", "Argent", "ArgentRose", "Noir", "Rose"],
     royalOak: ["argent", "gold", "noire", "rose"]
 };
 let currentBracelet = 0;
 
-// CADRAN TYPE
 const dialTypes = ["baton", "arabic"];
 let currentDialType = 0;
 
-// COULEURS cadran
 const dialColors = {
     baton: ["bleu", "blanc"],
     arabic: ["bleu", "blanc"]
 };
 let currentDialColor = 0;
 
-// AIGUILLES
 const hands = ["argent", "rose"];
 let currentHands = 0;
 
 
-// --- UPDATE ---
 function updateWatch() {
 
     const type = types[currentType];
@@ -36,23 +30,23 @@ function updateWatch() {
     const dialColor = dialColors[dialType][currentDialColor];
     const hand = hands[currentHands];
 
-    // TYPE (fond montre)
-    document.getElementById("typeImg").src =
-        `assets/type/${type}.png`;
+    const typePath = `assets/type/${type}.png`;
+    const braceletPath = `assets/bracelets/${type}/${bracelet}.png`;
+    const dialPath = `assets/cadran/${dialType}/${dialColor}.png`;
+    const handsPath = `assets/aiguilles/${hand}.png`;
 
-    // BRACELET
-    document.getElementById("braceletImg").src =
-        `assets/bracelets/${type}/${bracelet}.png`;
+    // 🔥 DEBUG CONSOLE
+    console.log("TYPE:", typePath);
+    console.log("BRACELET:", braceletPath);
+    console.log("CADRAN:", dialPath);
+    console.log("AIGUILLES:", handsPath);
+    console.log("--------------------");
 
-    // CADRAN
-    document.getElementById("dialImg").src =
-        `assets/cadran/${dialType}/${dialColor}.png`;
+    document.getElementById("typeImg").src = typePath;
+    document.getElementById("braceletImg").src = braceletPath;
+    document.getElementById("dialImg").src = dialPath;
+    document.getElementById("handsImg").src = handsPath;
 
-    // AIGUILLES
-    document.getElementById("handsImg").src =
-        `assets/aiguilles/${hand}.png`;
-
-    // LABELS
     document.getElementById("typeName").innerText = type;
     document.getElementById("braceletName").innerText = bracelet;
     document.getElementById("dialTypeName").innerText = dialType;
@@ -120,6 +114,4 @@ function prevHands() {
     updateWatch();
 }
 
-
-// INIT
 updateWatch();
